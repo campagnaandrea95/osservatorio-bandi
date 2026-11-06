@@ -164,6 +164,7 @@ tr.more td{padding:14px 10px;display:flex;flex-wrap:wrap;gap:8px 16px;align-item
 .sh-app{margin-top:22px;padding-top:6px;border-top:1px solid var(--line)}
 .sh-tab{overflow-x:auto}.sh-tab table{font-size:.84rem;width:auto}.sh-tab th,.sh-tab td{border:1px solid var(--line);padding:4px 10px;text-align:left}.sh-tab th{background:var(--surface-2);font-size:.76rem}
 .sh-src{font-size:.82rem;color:var(--muted);margin-top:16px;overflow-wrap:anywhere}
+.sh-acts{margin:-4px 0 6px}
 .sh-note{margin-top:18px;font-size:.82rem;color:var(--muted);border-top:1px solid var(--line);padding-top:10px}
 
 footer{border-top:1px solid var(--line);padding-top:14px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:.82rem;color:var(--muted)}
@@ -247,6 +248,7 @@ footer a{color:var(--muted)}
   <div class="sh-panel"><button type="button" class="sh-x" id="sh-close">Chiudi</button><div id="sh-body"></div></div>
 </div>
 
+<script src="lib/scheda-word.js" defer></script>
 <script>
 (()=>{
   const TIP=["R&D","Innovazione","Internazionalizzazione","Avvio d'impresa e startup","Digitalizzazione","Sostenibilità ed energia","Investimenti produttivi","Altro"];
@@ -259,7 +261,10 @@ footer a{color:var(--muted)}
   const it=d=>iso(d)?d.slice(8,10)+"/"+d.slice(5,7)+"/"+d.slice(0,4):"n.d.";
   const days=d=>iso(d)?Math.round((new Date(d+"T00:00:00")-today)/864e5):null;
   const safeUrl=u=>/^https?:\/\//i.test(u||"")?u:"";
-  let rows=[],inviti=[],schedeIdx={},inCoda={},meta={};
+  let rows=[],inviti=[],schedeIdx={},inCoda={},meta={},cur=null;
+  /* Modulo Google per le richieste di scheda: {id}, {n} e {titolo} vengono sostituiti con i dati dell'opportunità */
+  const MODULO="https://docs.google.com/forms/d/e/1FAIpQLSeQaMk65S-RhvV484aokkRZuTJzLQXBk2yDzimdW9x6yi-B_Q/viewform?usp=pp_url&entry.188884637={id}&entry.1362605699=N.%20{n}%20%E2%80%93%20{titolo}";
+  const moduloUrl=()=>meta.modulo_url||MODULO;
   const PASSO=30;let mostrate=PASSO;
   const LS="oss-richieste";let mie={};try{mie=JSON.parse(localStorage.getItem(LS)||"{}")||{}}catch(e){mie={}}
   const salvaMie=()=>{try{localStorage.setItem(LS,JSON.stringify(mie))}catch(e){}};
@@ -315,11 +320,11 @@ footer a{color:var(--muted)}
     if(schedeIdx[r.id])return `<button type="button" class="sbtn" data-open="${esc(r.id)}">Apri scheda</button>`;
     if(st==="Scaduto")return "";
     if(inCoda[r.id]||mie[r.id])return `<span class="pill st-da">Scheda in preparazione</span><small class="sst">Sarà pubblicata qui entro poche ore.</small>`;
-    return /^https:\/\//.test(meta.modulo_url||"")?`<button type="button" class="rbtn" data-req="${esc(r.id)}">Richiedi scheda</button>`:"";
+    return /^https:\/\//.test(moduloUrl())?`<button type="button" class="rbtn" data-req="${esc(r.id)}">Richiedi scheda</button>`:"";
   }
   function richiedi(id){
     const r=rows.find(x=>x.id===id);if(!r)return;
-    const tpl=meta.modulo_url||"";
+    const tpl=moduloUrl();
     if(!/^https:\/\//.test(tpl)){toast("La richiesta delle schede sarà attiva quando il sito andrà online.");return}
     const url=tpl.replace("{id}",encodeURIComponent(r.id)).replace("{n}",encodeURIComponent(r.n??"")).replace("{titolo}",encodeURIComponent(r.titolo||""));
     window.open(url,"_blank","noopener");
@@ -378,18 +383,26 @@ footer a{color:var(--muted)}
     $("sheet").hidden=false;$("sh-close").focus();
     try{
       const sc=await getJSON(`data/schede/${encodeURIComponent(id)}.json`);
+      cur={sc,r};
       $("sh-body").innerHTML=`<p class="sh-eyebrow">N. ${esc(sc.n??r.n??"")} · scheda del ${it((sc.generata_il||"").slice(0,10))}</p>
         <h2 id="sh-title">${esc(sc.titolo||r.titolo)}</h2>
+        <div class="sh-acts"><button type="button" class="ghost" id="sh-word">Scarica Word</button></div>
         ${(sc.voci||[]).map(v=>`<section class="sh-sec"><h3>${esc(v.voce)}</h3>${v.voce==="Link"?linkify(v.valore):fmtText(v.valore)}</section>`).join("")}
         ${(sc.appendici||[]).length?`<div class="sh-app">${sc.appendici.map(v=>`<section class="sh-sec"><h3>${esc(v.voce)}</h3>${fmtText(v.valore)}</section>`).join("")}</div>`:""}
         ${(sc.fonti||[]).length?`<p class="sh-src"><b>Fonti consultate</b> ${(sc.fonti||[]).map(safeUrl).filter(Boolean).map(u=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(u.replace(/^https?:\/\//,"").slice(0,70))}</a>`).join(" · ")}</p>`:""}
         <p class="sh-note">Scheda redatta alla data indicata sulla base delle fonti elencate. Prima di presentare domanda verifica sull'avviso ufficiale eventuali rettifiche e proroghe.</p>`;
     }catch(e){$("sh-body").innerHTML=`<h2 id="sh-title">${esc(r.titolo||"Scheda")}</h2><p>La scheda non si è caricata. Controlla la connessione e riprova.</p>`}
   }
+  function scaricaWord(btn){
+    if(!cur||!window.SchedaWord){toast("Il documento Word non è disponibile in questo momento. Riprova tra poco.");return}
+    const t=btn.textContent;btn.disabled=true;btn.textContent="Preparazione…";
+    SchedaWord.download(cur.sc,cur.r).catch(()=>toast("Non è stato possibile creare il documento Word. Controlla la connessione e riprova.")).finally(()=>{btn.disabled=false;btn.textContent=t});
+  }
   function closeSheet(){$("sheet").hidden=true;if(lastFocus)lastFocus.focus()}
   document.addEventListener("click",ev=>{
     const o=ev.target.closest("[data-open]");if(o){openScheda(o.dataset.open);return}
     const q=ev.target.closest("[data-req]");if(q){richiedi(q.dataset.req);return}
+    if(ev.target.closest("#sh-word")){scaricaWord(ev.target.closest("#sh-word"));return}
     if(ev.target.closest("#sh-close")||ev.target.id==="sheet"){closeSheet();return}
     const c=ev.target.closest(".chip");if(c){$(c.dataset.sel).value=c.dataset.v;mostrate=PASSO;render();return}
     if(ev.target.id==="more"){const i=mostrate;mostrate+=PASSO;render();const r=$("rows").rows[i];if(r){const a=r.querySelector("a,button");if(a)a.focus({preventScroll:true})}return}
