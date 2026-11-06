@@ -1,0 +1,1 @@
+# osservatorio-bandi
