@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Osservatorio bandi</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="Avvisi pubblici per contributi a imprese, startup e ricerca in Italia, nelle Regioni e in Europa, con calendari regionali e schede di approfondimento. Aggiornato ogni notte.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,500;7..72,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: registro pubblico in sola lettura — testata con data di aggiornamento, riepilogo, filtri, elenco numerato; pannello laterale per le schede */
+:root{
+  --bg:#f4f6f7; --surface:#ffffff; --surface-2:#eaeff1; --fg:#17232a; --muted:#56656d; --line:#d5dde0;
+  --accent:#1d5c7a; --accent-soft:#dcebf2; --warn:#965b0a; --warn-soft:#f6ead5; --bad:#9b2f2a; --bad-soft:#f6e0de;
+  --idle:#6a7579; --idle-soft:#e6eaeb; --heat1:#cfe2ea; --heat2:#9fc6d6; --c2:#3f8f6b; --c3:#c47a1f; --c4:#7d5fb3;
+  --display:"Literata",Georgia,serif; --body:"IBM Plex Sans",system-ui,-apple-system,sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  color-scheme:light;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#11181b; --surface:#192226; --surface-2:#212c31; --fg:#e2eaed; --muted:#93a3aa; --line:#2c383d;
+  --accent:#74b6d4; --accent-soft:#1b3340; --warn:#e2ad66; --warn-soft:#3a2c19; --bad:#ee8f86; --bad-soft:#3d2120;
+  --idle:#a3adb0; --idle-soft:#283134; --heat1:#1f3a46; --heat2:#2c5a6d; --c2:#7cc7a2; --c3:#e0a35a; --c4:#ad93db; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#11181b; --surface:#192226; --surface-2:#212c31; --fg:#e2eaed; --muted:#93a3aa; --line:#2c383d;
+  --accent:#74b6d4; --accent-soft:#1b3340; --warn:#e2ad66; --warn-soft:#3a2c19; --bad:#ee8f86; --bad-soft:#3d2120;
+  --idle:#a3adb0; --idle-soft:#283134; --heat1:#1f3a46; --heat2:#2c5a6d; --c2:#7cc7a2; --c3:#e0a35a; --c4:#ad93db; color-scheme:dark}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.5}
+[hidden]{display:none!important}
+img{max-width:100%}
+a{color:var(--accent)}
+:is(button,input,select,a):focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+button{font:inherit;cursor:pointer}
+.wrap{max-width:1240px;margin:0 auto;padding-block:28px 40px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:grid;gap:20px}
+
+/* testata */
+.mast{display:flex;flex-wrap:wrap;gap:12px 28px;align-items:flex-end;justify-content:space-between;border-bottom:2px solid var(--fg);padding-bottom:14px}
+.mast h1{font-family:var(--display);font-weight:600;font-size:clamp(1.7rem,4vw,2.3rem);margin:0;letter-spacing:-.01em;line-height:1.1}
+.mast .sub{color:var(--muted);margin:6px 0 0;max-width:62ch;text-wrap:pretty}
+.stamp{font-family:var(--mono);font-size:.78rem;color:var(--muted);text-align:right;display:grid;gap:2px}
+.stamp b{font-weight:500;color:var(--fg)}
+.notice{background:var(--warn-soft);color:var(--fg);border-radius:6px;padding:10px 14px;font-size:.88rem;max-width:110ch}
+.notice b{color:var(--warn)}
+
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);overflow-x:auto}
+.tabs a{padding:9px 14px;font-size:.92rem;font-weight:500;color:var(--muted);text-decoration:none;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.tabs a[aria-current="page"]{color:var(--accent);border-bottom-color:var(--accent)}
+.view{display:grid;gap:18px;min-width:0}
+
+/* riepilogo */
+.summary{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:8px;overflow:hidden}
+@media (max-width:760px){.summary{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.k{background:var(--surface);padding:12px 14px;display:grid;gap:2px}
+.k .n{font-family:var(--mono);font-size:1.45rem;font-weight:500;font-variant-numeric:tabular-nums;line-height:1.2}
+.k .l{font-size:.8rem;color:var(--muted)}
+.k.ok .n{color:var(--accent)} .k.warn .n{color:var(--warn)} .k.bad .n{color:var(--bad)}
+.breakdown{display:flex;flex-wrap:wrap;gap:6px 18px;font-size:.82rem;color:var(--muted)}
+.breakdown b{font-weight:600;color:var(--fg);margin-right:4px}
+.chip{border:0;background:none;color:var(--fg);padding:0;font-size:.82rem;border-bottom:1px dotted var(--muted)}
+.chip span{font-family:var(--mono);color:var(--muted);margin-left:3px}
+
+/* filtri */
+.filters{display:grid;grid-template-columns:minmax(0,2.2fr) repeat(4,minmax(0,1fr)) auto;gap:10px;align-items:end}
+@media (max-width:980px){.filters{grid-template-columns:repeat(3,minmax(0,1fr))}.filters .search{grid-column:1/-1}}
+@media (max-width:520px){.filters{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.f{display:grid;gap:4px;min-width:0}
+.f label{font-size:.72rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.f input,.f select{font:inherit;font-size:.9rem;padding:7px 9px;border:1px solid var(--line);border-radius:6px;background:var(--surface);color:var(--fg);min-width:0;width:100%}
+.reset{font-size:.84rem;font-weight:500;padding:7px 12px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--muted);white-space:nowrap}
+.reset:not([disabled]){border-color:var(--accent);color:var(--accent)}
+.reset[disabled]{cursor:default;opacity:.7}
+.bar{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between}
+.count{font-size:.84rem;color:var(--muted);font-variant-numeric:tabular-nums}
+.ghost{font-size:.84rem;font-weight:500;padding:6px 12px;border-radius:6px;border:1px solid var(--accent);background:var(--surface);color:var(--accent)}
+.ghost:hover{background:var(--accent-soft)}
+
+/* elenco */
+.gridwrap{background:var(--surface);border:1px solid var(--line);border-radius:8px;overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.88rem}
+thead th{background:var(--surface-2);text-align:left;font-size:.72rem;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);padding:9px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+tbody td{padding:12px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+tbody tr.dim{opacity:.55}
+td.num{font-family:var(--mono);color:var(--muted);font-variant-numeric:tabular-nums;width:3.5em}
+td.tit{min-width:230px;max-width:320px}
+td.tit a{color:var(--fg);font-weight:600;text-decoration:none;border-bottom:1px solid var(--line)}
+td.tit a:hover{border-color:var(--accent)}
+.ente{color:var(--muted);font-size:.82rem;margin-top:3px}
+.tags{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+.tag{font-size:.72rem;padding:1px 7px;border-radius:4px;background:var(--surface-2);color:var(--muted);white-space:nowrap}
+.tag.ver{background:var(--warn-soft);color:var(--warn)}
+td.sin{min-width:280px;max-width:460px}
+.ag{color:var(--muted);font-size:.82rem;margin-top:4px}
+td.dt{font-family:var(--mono);font-size:.82rem;font-variant-numeric:tabular-nums;min-width:120px}
+td.dt .soon{color:var(--warn);font-weight:500}
+td.dt small{display:block;font-family:var(--body);color:var(--muted)}
+.pill{display:inline-block;font-size:.72rem;font-weight:500;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.st-attivo{background:var(--accent-soft);color:var(--accent)}
+.st-da{background:var(--warn-soft);color:var(--warn)}
+.st-scaduto{background:var(--idle-soft);color:var(--idle)}
+.st-prev{background:var(--surface-2);color:var(--muted)}
+.st-ok{background:var(--accent-soft);color:var(--accent)}
+.st-late{background:var(--bad-soft);color:var(--bad)}
+.st-moved{background:var(--warn-soft);color:var(--warn)}
+.sbtn{font-size:.78rem;font-weight:500;padding:5px 10px;border-radius:6px;border:1px solid var(--accent);background:var(--accent);color:var(--surface);white-space:nowrap}
+.sbtn:hover{filter:brightness(1.08)}
+.rbtn{font-size:.78rem;font-weight:500;padding:5px 10px;border-radius:6px;border:1px solid var(--accent);background:var(--surface);color:var(--accent);white-space:nowrap}
+.rbtn:hover{background:var(--accent-soft)}
+.sst{display:block;font-size:.74rem;color:var(--muted);margin-top:4px;max-width:16em}
+.toast{z-index:30;position:fixed;left:50%;transform:translateX(-50%);bottom:calc(18px + env(safe-area-inset-bottom,0px));background:var(--fg);color:var(--bg);padding:9px 14px;border-radius:6px;font-size:.88rem;max-width:min(520px,calc(100% - 32px))}
+.empty td{padding:34px 18px;color:var(--muted)}
+tr.more td{padding:14px 10px;display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}
+#view-registro tbody tr.more{display:block}
+.empty strong{display:block;color:var(--fg);margin-bottom:4px}
+@media (max-width:760px){
+  #view-registro table,#view-registro thead,#view-registro tbody,#view-registro tr,#view-registro td{display:block}
+  #view-registro thead{display:none}
+  #view-registro tbody tr{padding:12px 14px;border-bottom:1px solid var(--line);display:grid;grid-template-columns:auto minmax(0,1fr);gap:6px 12px}
+  #view-registro tbody td{border:0;padding:0;max-width:none;min-width:0}
+  #view-registro td.num{grid-row:span 4}
+  #view-registro td.dt::before{content:attr(data-l) " ";font-family:var(--body);color:var(--muted)}
+  #view-registro td.dt small{display:inline;margin-left:6px}
+  #view-registro .empty{display:block}
+}
+
+/* radar calendari */
+.rd-title{font-family:var(--display);font-weight:600;font-size:1.35rem;margin:0}
+.hint{font-size:.84rem;color:var(--muted);margin:0;max-width:90ch}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px}
+@media (max-width:860px){.two{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:16px 18px;display:grid;gap:12px;min-width:0}
+.card h3{margin:0;font-size:1rem;font-weight:600}
+.tiles{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px}
+@media (max-width:420px){.tiles{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.tile{border:0;border-radius:4px;padding:8px 2px;font-size:.72rem;text-align:center;color:var(--fg);background:var(--surface-2);line-height:1.3}
+.tile b{display:block;font-family:var(--mono);font-size:.92rem}
+.tile.h1{background:var(--heat1)}.tile.h2{background:var(--heat2)}.tile.h3{background:var(--accent);color:var(--surface)}
+.tile[aria-pressed="true"]{outline:2px solid var(--fg);outline-offset:1px}
+.tl-wrap{overflow-x:auto}.tl{min-width:640px;display:grid;gap:4px}
+.tl-row{display:grid;grid-template-columns:220px minmax(0,1fr);align-items:center;gap:10px;min-height:28px;font-size:.82rem}
+.tl-row.head{font-family:var(--mono);font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);border-bottom:1px solid var(--line);padding-bottom:4px}
+.tl-months{display:grid;grid-template-columns:repeat(6,minmax(0,1fr))}
+.tl-lab{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.tl-track{position:relative;height:14px;background:repeating-linear-gradient(90deg,var(--surface-2) 0,var(--surface-2) 1px,transparent 1px,transparent 16.666%)}
+.tl-dot{position:absolute;top:1px;width:12px;height:12px;border-radius:50%;transform:translateX(-50%)}
+.t-rd{background:var(--accent)}.t-dg{background:var(--c2)}.t-in{background:var(--c3)}.t-av{background:var(--c4)}.t-ot{background:var(--idle)}
+.legend{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:.78rem;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+#view-calendari table{min-width:760px}
+
+/* scheda */
+.sheet{position:fixed;inset:0;z-index:20;background:rgba(8,14,17,.5);display:flex;justify-content:flex-end}
+.sh-panel{background:var(--surface);color:var(--fg);width:min(660px,100%);height:100%;overflow-y:auto;padding-block:calc(22px + env(safe-area-inset-top,0px)) calc(28px + env(safe-area-inset-bottom,0px));padding-left:24px;padding-right:max(24px,env(safe-area-inset-right,0px));box-shadow:-8px 0 30px rgba(0,0,0,.18);position:relative}
+.sh-x{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:max(16px,env(safe-area-inset-right,0px));border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:6px;padding:4px 10px;font-size:.82rem}
+.sh-eyebrow{font-family:var(--mono);font-size:.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin:0 80px 6px 0}
+.sh-panel h2{font-family:var(--display);font-weight:600;font-size:1.35rem;margin:0 0 14px;text-wrap:balance}
+.sh-sec{margin-top:16px}.sh-sec h3{font-size:.95rem;font-weight:600;margin:0 0 6px;color:var(--accent)}
+.sh-sec p{margin:0 0 6px;overflow-wrap:anywhere}.sh-sec ul{margin:0 0 6px;padding-left:1.2em}.sh-sec li{margin:2px 0}
+.sh-sec p.nb{font-size:.88rem;background:var(--surface-2);padding:6px 10px;border-radius:4px}
+.sh-sec a{overflow-wrap:anywhere}
+.sh-app{margin-top:22px;padding-top:6px;border-top:1px solid var(--line)}
+.sh-tab{overflow-x:auto}.sh-tab table{font-size:.84rem;width:auto}.sh-tab th,.sh-tab td{border:1px solid var(--line);padding:4px 10px;text-align:left}.sh-tab th{background:var(--surface-2);font-size:.76rem}
+.sh-src{font-size:.82rem;color:var(--muted);margin-top:16px;overflow-wrap:anywhere}
+.sh-note{margin-top:18px;font-size:.82rem;color:var(--muted);border-top:1px solid var(--line);padding-top:10px}
+
+footer{border-top:1px solid var(--line);padding-top:14px;display:flex;flex-wrap:wrap;gap:8px 24px;justify-content:space-between;font-size:.82rem;color:var(--muted)}
+footer p{margin:0;max-width:80ch}
+footer a{color:var(--muted)}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="mast">
+    <div>
+      <h1>Osservatorio bandi</h1>
+      <p class="sub">Avvisi pubblici per contributi a imprese, startup e ricerca: europei, nazionali e regionali.</p>
+    </div>
+    <div class="stamp"><span>Ultimo aggiornamento</span><b id="agg">–</b></div>
+  </header>
+
+
+
+  <section id="view-registro" class="view" aria-label="Opportunità">
+    <div class="summary" id="summary">
+      <div class="k"><span class="n">–</span><span class="l">Opportunità in elenco</span></div>
+      <div class="k ok"><span class="n">–</span><span class="l">Aperte</span></div>
+      <div class="k"><span class="n">–</span><span class="l">In arrivo</span></div>
+      <div class="k"><span class="n">–</span><span class="l">In scadenza entro 15 giorni</span></div>
+    </div>
+    <div class="breakdown" id="breakdown"></div>
+    <div class="filters">
+      <div class="f search"><label for="q">Cerca</label><input id="q" type="search" placeholder="Titolo, ente, beneficiari, parola chiave" autocomplete="off"></div>
+      <div class="f"><label for="f-tip">Tipologia</label><select id="f-tip"><option value="">Tutte</option></select></div>
+      <div class="f"><label for="f-terr">Territorio</label><select id="f-terr"><option value="">Tutti</option></select></div>
+      <div class="f"><label for="f-stato">Stato</label><select id="f-stato"><option value="">Aperte e in arrivo</option><option>Aperto</option><option>In arrivo</option><option>Scaduto</option><option value="tutti">Tutti, anche scaduti</option></select></div>
+      <div class="f"><label for="f-ord">Ordina per</label><select id="f-ord"><option value="scad">Scadenza più vicina</option><option value="segn">Ultimi inseriti</option><option value="pub">Data di pubblicazione</option></select></div>
+      <button type="button" class="reset" id="reset" disabled>Azzera filtri</button>
+    </div>
+    <div class="bar"><span class="count" id="count" role="status">Caricamento in corso…</span><button type="button" class="ghost" id="csv">Scarica elenco (CSV)</button></div>
+    <div class="gridwrap">
+      <table>
+        <thead><tr><th>N.</th><th>Opportunità</th><th>In sintesi</th><th>Scadenza</th><th>Stato</th><th>Scheda</th></tr></thead>
+        <tbody id="rows"><tr class="empty"><td colspan="6"><strong>Caricamento dell'elenco</strong>Le opportunità compaiono qui tra un istante.</td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <section id="view-calendari" class="view" aria-label="Calendari regionali" hidden>
+    <div>
+      <h2 class="rd-title">Calendari regionali degli inviti</h2>
+      <p class="hint">Gli avvisi che Regioni e Ministeri prevedono di aprire secondo i calendari ufficiali dei programmi FESR e dei piani nazionali. Le date sono previsioni dell'ente e spesso slittano.</p>
+    </div>
+    <div class="summary" id="rd-kpi"></div>
+    <div class="two">
+      <div class="card"><h3>Inviti previsti per territorio</h3><div class="tiles" id="rd-tiles"></div><p class="hint">Tocca un territorio per filtrare l'elenco.</p></div>
+      <div class="card"><h3>Aperture previste nei prossimi 6 mesi</h3><div class="tl-wrap"><div class="tl" id="rd-tl"></div></div>
+        <div class="legend"><span><i class="t-rd"></i>R&amp;D e innovazione</span><span><i class="t-dg"></i>Digitalizzazione</span><span><i class="t-in"></i>Internazionalizzazione</span><span><i class="t-av"></i>Avvio d'impresa</span><span><i class="t-ot"></i>Altro</span></div></div>
+    </div>
+    <div class="filters">
+      <div class="f search"><label for="rq">Cerca</label><input id="rq" type="search" placeholder="Titolo, programma, beneficiari" autocomplete="off"></div>
+      <div class="f"><label for="r-tip">Tipologia</label><select id="r-tip"><option value="">Tutte</option></select></div>
+      <div class="f"><label for="r-terr">Territorio</label><select id="r-terr"><option value="">Tutti</option></select></div>
+      <div class="f"><label for="r-os">Obiettivo</label><select id="r-os"><option value="">Tutti</option></select></div>
+      <div class="f"><label for="r-st">Stato</label><select id="r-st"><option value="">Tutti</option><option>Previsto</option><option>In ritardo</option><option>Rinviato</option></select></div>
+      <button type="button" class="reset" id="r-reset" disabled>Azzera filtri</button>
+    </div>
+    <span class="count" id="rd-count" role="status"></span>
+    <div class="gridwrap">
+      <table>
+        <thead><tr><th>Territorio</th><th>Invito</th><th>Obiettivo</th><th>Beneficiari</th><th>Dotazione</th><th>Apertura prevista</th><th>Stato</th></tr></thead>
+        <tbody id="rd-rows"><tr class="empty"><td colspan="7"><strong>Caricamento dei calendari</strong></td></tr></tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <p>Elenco informativo compilato da un monitoraggio automatico di siti istituzionali, portali regionali e aggregatori. Non sostituisce l'avviso ufficiale e non costituisce consulenza.</p>
+    <p><a href="https://claude.ai/artifact/CQi3oBFP7t86wF8roG6qnG" rel="nofollow noopener" target="_blank">Area riservata</a></p>
+  </footer>
+</div>
+
+<div class="sheet" id="sheet" hidden role="dialog" aria-modal="true" aria-labelledby="sh-title">
+  <div class="sh-panel"><button type="button" class="sh-x" id="sh-close">Chiudi</button><div id="sh-body"></div></div>
+</div>
+
+<script>
+(()=>{
+  const TIP=["R&D","Innovazione","Internazionalizzazione","Avvio d'impresa e startup","Digitalizzazione","Sostenibilità ed energia","Investimenti produttivi","Altro"];
+  const ABBR={"Valle d'Aosta":"VdA","Piemonte":"PIE","Lombardia":"LOM","Provincia di Trento":"TN","Provincia di Bolzano":"BZ","Veneto":"VEN","Friuli Venezia Giulia":"FVG","Liguria":"LIG","Emilia-Romagna":"E-R","Toscana":"TOS","Marche":"MAR","Umbria":"UMB","Abruzzo":"ABR","Lazio":"LAZ","Molise":"MOL","Campania":"CAM","Puglia":"PUG","Basilicata":"BAS","Calabria":"CAL","Sardegna":"SAR","Sicilia":"SIC","Italia":"ITA"};
+  const TORD=Object.keys(ABBR);
+  const $=id=>document.getElementById(id);
+  const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+  const today=new Date();today.setHours(0,0,0,0);
+  const iso=d=>/^\d{4}-\d{2}-\d{2}$/.test(d||"")?d:"";
+  const it=d=>iso(d)?d.slice(8,10)+"/"+d.slice(5,7)+"/"+d.slice(0,4):"n.d.";
+  const days=d=>iso(d)?Math.round((new Date(d+"T00:00:00")-today)/864e5):null;
+  const safeUrl=u=>/^https?:\/\//i.test(u||"")?u:"";
+  let rows=[],inviti=[],schedeIdx={},inCoda={},meta={};
+  const PASSO=30;let mostrate=PASSO;
+  const LS="oss-richieste";let mie={};try{mie=JSON.parse(localStorage.getItem(LS)||"{}")||{}}catch(e){mie={}}
+  const salvaMie=()=>{try{localStorage.setItem(LS,JSON.stringify(mie))}catch(e){}};
+  let toastT;function toast(m){let t=document.querySelector(".toast");if(!t){t=document.createElement("div");t.className="toast";t.setAttribute("role","status");document.body.appendChild(t)}t.textContent=m;t.hidden=false;clearTimeout(toastT);toastT=setTimeout(()=>t.hidden=true,Math.max(3000,m.length*60))}
+
+  const getJSON=p=>fetch(p,{cache:"no-cache"}).then(r=>{if(!r.ok)throw new Error(r.status);return r.json()});
+
+  function stato(r){const g=days(r.scadenza_iso);if(g!==null&&g<0)return"Scaduto";return r.stato==="Da attivare"?"In arrivo":"Aperto"}
+  function fillSel(sel,vals){const cur=sel.value;sel.length=1;vals.forEach(v=>{const o=document.createElement("option");o.textContent=v;sel.appendChild(o)});sel.value=vals.includes(cur)?cur:""}
+  function terrOrder(list){const s=[...new Set(list.filter(Boolean))];const head=["Europa","Italia"].filter(x=>s.includes(x));return head.concat(s.filter(x=>!head.includes(x)).sort((a,b)=>a.localeCompare(b,"it")))}
+
+  /* ---------- Opportunità ---------- */
+  function filtered(){
+    const q=$("q").value.trim().toLowerCase(),t=$("f-tip").value,te=$("f-terr").value,s=$("f-stato").value,o=$("f-ord").value;
+    const v=rows.filter(r=>{const st=stato(r);
+      if(s===""&&st==="Scaduto")return false;
+      if(s&&s!=="tutti"&&st!==s)return false;
+      return(!t||r.tipologia===t)&&(!te||r.territorio===te)&&(!q||[r.titolo,r.ente,r.sintesi,r.beneficiari,r.agevolazione,r.territorio].join(" ").toLowerCase().includes(q))});
+    const n=r=>Number(r.n)||0;
+    const by={segn:(a,b)=>(b.segnalato_il||"").localeCompare(a.segnalato_il||"")||n(b)-n(a),
+      pub:(a,b)=>(b.pubblicato_il||"").localeCompare(a.pubblicato_il||"")||n(b)-n(a),
+      scad:(a,b)=>{const ka=stato(a)==="Scaduto"?2:iso(a.scadenza_iso)?0:1,kb=stato(b)==="Scaduto"?2:iso(b.scadenza_iso)?0:1;
+        return ka-kb||(ka===2?(b.scadenza_iso||"").localeCompare(a.scadenza_iso||""):(a.scadenza_iso||"").localeCompare(b.scadenza_iso||""))||n(a)-n(b)}};
+    return v.sort(by[o]);
+  }
+  function summary(){
+    const live=rows.filter(r=>stato(r)!=="Scaduto");
+    const soon=live.filter(r=>stato(r)==="Aperto"&&(g=>g!==null&&g<=15)(days(r.scadenza_iso))).length;
+    const vals=[[live.length,"Opportunità in elenco",""],[live.filter(r=>stato(r)==="Aperto").length,"Aperte","ok"],[live.filter(r=>stato(r)==="In arrivo").length,"In arrivo",""],[soon,"In scadenza entro 15 giorni",soon?"warn":""]];
+    $("summary").innerHTML=vals.map(([n,l,c])=>`<div class="k ${c}"><span class="n">${n}</span><span class="l">${l}</span></div>`).join("");
+    const cnt=key=>{const m={};live.forEach(r=>{const v=r[key];if(v)m[v]=(m[v]||0)+1});return m};
+    const tc=cnt("tipologia"),rc=cnt("territorio");
+    const part=(lab,m,sel,order)=>Object.keys(m).length?`<span><b>${lab}</b>${order(Object.keys(m)).map(k=>`<button type="button" class="chip" data-sel="${sel}" data-v="${esc(k)}">${esc(k)}<span>${m[k]}</span></button>`).join(" · ")}</span>`:"";
+    const tipOrd=ks=>ks.sort((a,b)=>{const ia=TIP.indexOf(a),ib=TIP.indexOf(b);return(ia<0?99:ia)-(ib<0?99:ib)});
+    $("breakdown").innerHTML=part("Tipologia",tc,"f-tip",tipOrd)+part("Territorio",rc,"f-terr",terrOrder);
+  }
+  function rowHtml(r){
+    const st=stato(r),g=days(r.scadenza_iso),soon=st==="Aperto"&&g!==null&&g<=15;
+    const scad=iso(r.scadenza_iso)?`<span class="${soon?"soon":""}">${it(r.scadenza_iso)}</span>${soon?`<small>${g===0?"oggi":g===1?"domani":"tra "+g+" giorni"}</small>`:""}${r.scadenza&&!/^\d{2}\/\d{2}\/\d{4}$/.test(r.scadenza)?`<small>${esc(r.scadenza)}</small>`:""}`:`<small style="font-family:var(--body);color:var(--fg)">${esc(r.scadenza||"n.d.")}</small>`;
+    const link=safeUrl(r.link);
+    return `<tr class="${st==="Scaduto"?"dim":""}">
+      <td class="num">${esc(r.n??"–")}</td>
+      <td class="tit">${link?`<a href="${esc(link)}" target="_blank" rel="noopener">${esc(r.titolo)}</a>`:esc(r.titolo)}
+        <div class="ente">${esc(r.ente)}</div>
+        <div class="tags">${r.tipologia?`<span class="tag">${esc(r.tipologia)}</span>`:""}${r.territorio?`<span class="tag">${esc(r.territorio)}</span>`:""}${r.da_verificare?`<span class="tag ver" title="Dati da fonte secondaria: controlla l'avviso ufficiale">Da verificare</span>`:""}</div></td>
+      <td class="sin">${esc(r.sintesi)}${r.agevolazione||r.beneficiari?`<div class="ag">${[r.beneficiari&&("Beneficiari: "+esc(r.beneficiari)),r.agevolazione&&("Agevolazione: "+esc(r.agevolazione))].filter(Boolean).join(" · ")}</div>`:""}</td>
+      <td class="dt" data-l="Scadenza">${scad}</td>
+      <td class="st"><span class="pill ${st==="Aperto"?"st-attivo":st==="In arrivo"?"st-da":"st-scaduto"}">${st}</span></td>
+      <td class="sc">${schedaCell(r,st)}</td>
+    </tr>`;
+  }
+  function schedaCell(r,st){
+    if(schedeIdx[r.id])return `<button type="button" class="sbtn" data-open="${esc(r.id)}">Apri scheda</button>`;
+    if(st==="Scaduto")return "";
+    if(inCoda[r.id]||mie[r.id])return `<span class="pill st-da">Scheda in preparazione</span><small class="sst">Sarà pubblicata qui entro poche ore.</small>`;
+    return /^https:\/\//.test(meta.modulo_url||"")?`<button type="button" class="rbtn" data-req="${esc(r.id)}">Richiedi scheda</button>`:"";
+  }
+  function richiedi(id){
+    const r=rows.find(x=>x.id===id);if(!r)return;
+    const tpl=meta.modulo_url||"";
+    if(!/^https:\/\//.test(tpl)){toast("La richiesta delle schede sarà attiva quando il sito andrà online.");return}
+    const url=tpl.replace("{id}",encodeURIComponent(r.id)).replace("{n}",encodeURIComponent(r.n??"")).replace("{titolo}",encodeURIComponent(r.titolo||""));
+    window.open(url,"_blank","noopener");
+    mie[id]=new Date().toISOString().slice(0,10);salvaMie();render();
+    toast("Invia il modulo che si è aperto: la scheda comparirà qui entro poche ore.");
+  }
+  function render(){
+    $("reset").disabled=!($("q").value.trim()||$("f-tip").value||$("f-terr").value||$("f-stato").value||$("f-ord").value!=="scad");
+    summary();
+    fillSel($("f-tip"),TIP.filter(t=>rows.some(r=>r.tipologia===t)));
+    fillSel($("f-terr"),terrOrder(rows.map(r=>r.territorio)));
+    const v=filtered(),live=rows.filter(r=>stato(r)!=="Scaduto").length;
+    $("count").textContent=v.length===live&&!$("f-stato").value?`${v.length} opportunità aperte o in arrivo`:`${v.length} opportunità mostrate`;
+    $("csv").disabled=!v.length;
+    const vis=v.slice(0,mostrate),resto=v.length-vis.length;
+    $("rows").innerHTML=v.length?vis.map(rowHtml).join("")+(resto?`<tr class="more"><td colspan="6"><button type="button" class="ghost" id="more">Mostra altre ${Math.min(PASSO,resto)}</button><span class="count">Visualizzate ${vis.length} di ${v.length}</span></td></tr>`:""):'<tr class="empty"><td colspan="6"><strong>Nessun risultato</strong>Nessuna opportunità corrisponde ai filtri scelti. Prova ad azzerarli.</td></tr>';
+  }
+  ["q","f-tip","f-terr","f-stato","f-ord"].forEach(id=>$(id).addEventListener("input",()=>{mostrate=PASSO;render()}));
+  $("reset").addEventListener("click",()=>{mostrate=PASSO;$("q").value="";["f-tip","f-terr","f-stato"].forEach(id=>$(id).value="");$("f-ord").value="scad";render();$("q").focus()});
+
+  $("csv").addEventListener("click",()=>{
+    const v=filtered();if(!v.length)return;
+    const cols=[["N.","n"],["Titolo","titolo"],["Ente","ente"],["Tipologia","tipologia"],["Territorio","territorio"],["Stato",stato],["Scadenza",r=>iso(r.scadenza_iso)?it(r.scadenza_iso):(r.scadenza||"n.d.")],["Sintesi","sintesi"],["Beneficiari","beneficiari"],["Agevolazione","agevolazione"],["Da verificare",r=>r.da_verificare?"sì":""],["Link","link"]];
+    const cell=x=>'"'+String(x??"").replace(/"/g,'""')+'"';
+    const csv="﻿"+[cols.map(c=>cell(c[0])).join(";")].concat(v.map(r=>cols.map(([,k])=>cell(typeof k==="function"?k(r):r[k])).join(";"))).join("\r\n");
+    const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));
+    a.download=`osservatorio-bandi-${new Date().toISOString().slice(0,10)}.csv`;document.body.appendChild(a);a.click();
+    setTimeout(()=>{URL.revokeObjectURL(a.href);a.remove()},500);
+  });
+
+  /* ---------- Schede ---------- */
+  function fmtText(t){
+    const lines=String(t||"").replace(/\r/g,"").split("\n");let out="",i=0;
+    while(i<lines.length){
+      const l=lines[i];
+      if(!l.trim()){i++;continue}
+      if(/^\s*[-•]\s+/.test(l)){
+        let html="<ul>";let openSub=false,first=true;
+        while(i<lines.length&&/^\s*[-•]\s+/.test(lines[i])){
+          const sub=/^\s{2,}[-•]\s+/.test(lines[i]),txt=esc(lines[i].replace(/^\s*[-•]\s+/,""));
+          if(sub){html+=(openSub?"":"<ul>")+`<li>${txt}</li>`;openSub=true}
+          else{if(openSub){html+="</ul>";openSub=false}html+=(first?"":"</li>")+`<li>${txt}`;first=false}
+          i++}
+        if(openSub)html+="</ul>";out+=html+(first?"":"</li>")+"</ul>";continue}
+      if(l.includes(" | ")){
+        const t2=[];while(i<lines.length&&lines[i].includes(" | ")){t2.push(lines[i].split(" | ").map(c=>esc(c.trim())));i++}
+        out+=`<div class="sh-tab"><table><thead><tr>${t2[0].map(c=>`<th>${c}</th>`).join("")}</tr></thead><tbody>${t2.slice(1).map(r=>`<tr>${r.map(c=>`<td>${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;continue}
+      out+=/^N\.B\./.test(l.trim())?`<p class="nb">${esc(l.trim())}</p>`:`<p>${esc(l)}</p>`;i++}
+    return out}
+  const linkify=t=>String(t||"").split(/\s+/).filter(Boolean).map(u=>safeUrl(u)?`<p><a href="${esc(u)}" target="_blank" rel="noopener">${esc(u)}</a></p>`:`<p>${esc(u)}</p>`).join("");
+  let lastFocus=null;
+  async function openScheda(id){
+    lastFocus=document.activeElement;
+    const r=rows.find(x=>x.id===id)||{};
+    $("sh-body").innerHTML=`<p class="sh-eyebrow">Scheda di approfondimento</p><h2 id="sh-title">${esc(r.titolo||"")}</h2><p class="hint">Caricamento della scheda…</p>`;
+    $("sheet").hidden=false;$("sh-close").focus();
+    try{
+      const sc=await getJSON(`data/schede/${encodeURIComponent(id)}.json`);
+      $("sh-body").innerHTML=`<p class="sh-eyebrow">N. ${esc(sc.n??r.n??"")} · scheda del ${it((sc.generata_il||"").slice(0,10))}</p>
+        <h2 id="sh-title">${esc(sc.titolo||r.titolo)}</h2>
+        ${(sc.voci||[]).map(v=>`<section class="sh-sec"><h3>${esc(v.voce)}</h3>${v.voce==="Link"?linkify(v.valore):fmtText(v.valore)}</section>`).join("")}
+        ${(sc.appendici||[]).length?`<div class="sh-app">${sc.appendici.map(v=>`<section class="sh-sec"><h3>${esc(v.voce)}</h3>${fmtText(v.valore)}</section>`).join("")}</div>`:""}
+        ${(sc.fonti||[]).length?`<p class="sh-src"><b>Fonti consultate</b> ${(sc.fonti||[]).map(safeUrl).filter(Boolean).map(u=>`<a href="${esc(u)}" target="_blank" rel="noopener">${esc(u.replace(/^https?:\/\//,"").slice(0,70))}</a>`).join(" · ")}</p>`:""}
+        <p class="sh-note">Scheda redatta alla data indicata sulla base delle fonti elencate. Prima di presentare domanda verifica sull'avviso ufficiale eventuali rettifiche e proroghe.</p>`;
+    }catch(e){$("sh-body").innerHTML=`<h2 id="sh-title">${esc(r.titolo||"Scheda")}</h2><p>La scheda non si è caricata. Controlla la connessione e riprova.</p>`}
+  }
+  function closeSheet(){$("sheet").hidden=true;if(lastFocus)lastFocus.focus()}
+  document.addEventListener("click",ev=>{
+    const o=ev.target.closest("[data-open]");if(o){openScheda(o.dataset.open);return}
+    const q=ev.target.closest("[data-req]");if(q){richiedi(q.dataset.req);return}
+    if(ev.target.closest("#sh-close")||ev.target.id==="sheet"){closeSheet();return}
+    const c=ev.target.closest(".chip");if(c){$(c.dataset.sel).value=c.dataset.v;mostrate=PASSO;render();return}
+    if(ev.target.id==="more"){const i=mostrate;mostrate+=PASSO;render();const r=$("rows").rows[i];if(r){const a=r.querySelector("a,button");if(a)a.focus({preventScroll:true})}return}
+    const t=ev.target.closest(".tile");if(t){$("r-terr").value=$("r-terr").value===t.dataset.terr?"":t.dataset.terr;renderRadar()}
+  });
+  document.addEventListener("keydown",ev=>{if(ev.key==="Escape"&&!$("sheet").hidden)closeSheet()});
+
+  /* ---------- Calendari ---------- */
+  const tcls=t=>t==="R&D"||t==="Innovazione"?"t-rd":t==="Digitalizzazione"?"t-dg":t==="Internazionalizzazione"?"t-in":t==="Avvio d'impresa e startup"?"t-av":"t-ot";
+  const eur=v=>{const n=Number(v);if(!n)return"";return n>=1e9?"€ "+(n/1e9).toLocaleString("it-IT",{maximumFractionDigits:1})+" mld":n>=1e6?"€ "+(n/1e6).toLocaleString("it-IT",{maximumFractionDigits:1})+" M":"€ "+n.toLocaleString("it-IT")};
+  function rStato(r){if(r.stato==="Pubblicato"||r.stato==="Rinviato")return r.stato;const g=days(r.apertura_iso);if(g!==null&&g<0)return"In ritardo";return"Previsto"}
+  function rFiltered(){const q=$("rq").value.trim().toLowerCase(),t=$("r-tip").value,te=$("r-terr").value,o=$("r-os").value,st=$("r-st").value;
+    return inviti.filter(r=>rStato(r)!=="Pubblicato").filter(r=>(!t||r.tipologia===t)&&(!te||r.territorio===te)&&(!o||r.obiettivo===o)&&(!st||rStato(r)===st)&&(!q||[r.titolo,r.programma,r.beneficiari,r.territorio].join(" ").toLowerCase().includes(q)))
+      .sort((a,b)=>(a.apertura_iso||"9999").localeCompare(b.apertura_iso||"9999"))}
+  function renderRadar(){
+    $("r-reset").disabled=!($("rq").value.trim()||$("r-tip").value||$("r-terr").value||$("r-os").value||$("r-st").value);
+    const fut=inviti.filter(r=>rStato(r)!=="Pubblicato");
+    fillSel($("r-tip"),TIP.filter(t=>fut.some(r=>r.tipologia===t)));
+    fillSel($("r-os"),[...new Set(fut.map(r=>r.obiettivo).filter(Boolean))].sort());
+    fillSel($("r-terr"),TORD.filter(t=>fut.some(r=>r.territorio===t)));
+    const six=fut.filter(r=>{const g=days(r.apertura_iso);return g===null||g<=183});
+    const soon=fut.filter(r=>{const g=days(r.apertura_iso);return g!==null&&g>=0&&g<=30}).length,late=fut.filter(r=>rStato(r)==="In ritardo").length;
+    const tot=six.reduce((s,r)=>s+(Number(r.dotazione_eur)||0),0);
+    $("rd-kpi").innerHTML=[[six.length,"Inviti previsti nei prossimi 6 mesi",""],[tot?eur(tot):"n.d.","Dotazione annunciata",""],[soon,"In apertura entro 30 giorni",soon?"warn":""],[late,"In ritardo sul calendario",late?"bad":""]]
+      .map(([n,l,c])=>`<div class="k ${c}"><span class="n">${n}</span><span class="l">${l}</span></div>`).join("");
+    const cnt={};fut.forEach(r=>{cnt[r.territorio]=(cnt[r.territorio]||0)+1});const mx=Math.max(1,...Object.values(cnt));const sel=$("r-terr").value;
+    $("rd-tiles").innerHTML=TORD.map(t=>{const n=cnt[t]||0,h=n===0?"":n/mx>.66?"h3":n/mx>.33?"h2":"h1";return `<button type="button" class="tile ${h}" data-terr="${esc(t)}" aria-pressed="${sel===t}" title="${esc(t)}" ${n?"":"disabled"}>${ABBR[t]}<b>${n}</b></button>`}).join("");
+    // timeline: prossimi 6 mesi
+    const start=new Date(today.getFullYear(),today.getMonth(),1),end=new Date(start.getFullYear(),start.getMonth()+6,1);
+    const months=[...Array(6)].map((_,i)=>new Date(start.getFullYear(),start.getMonth()+i,1).toLocaleDateString("it-IT",{month:"short",year:"2-digit"}));
+    const inWin=rFiltered().filter(r=>{const d=iso(r.apertura_iso)&&new Date(r.apertura_iso+"T00:00:00");return d&&d>=start&&d<end}).slice(0,14);
+    $("rd-tl").innerHTML=`<div class="tl-row head"><span>Invito</span><div class="tl-months">${months.map(m=>`<span>${m}</span>`).join("")}</div></div>`+
+      (inWin.length?inWin.map(r=>{const d=new Date(r.apertura_iso+"T00:00:00");const p=(d-start)/(end-start)*100;
+        return `<div class="tl-row"><span class="tl-lab" title="${esc(r.titolo)}"><b>${esc(ABBR[r.territorio]||r.territorio)}</b> · ${esc(r.titolo)}</span><div class="tl-track"><span class="tl-dot ${tcls(r.tipologia)}" style="left:${p.toFixed(2)}%" title="${it(r.apertura_iso)}"></span></div></div>`}).join("")
+      :`<p class="hint">Nessuna apertura con data precisa nei prossimi 6 mesi per i filtri scelti.</p>`);
+    const v=rFiltered();
+    $("rd-count").textContent=`${v.length} inviti`;
+    $("rd-rows").innerHTML=v.length?v.map(r=>{const st=rStato(r),g=days(r.apertura_iso);
+      const pill=st==="In ritardo"?`<span class="pill st-late">In ritardo</span>`:st==="Rinviato"?`<span class="pill st-moved">Rinviato</span>`:`<span class="pill st-prev">Previsto${g!==null&&g<=60?` · tra ${g} gg`:""}</span>`;
+      const src=safeUrl(r.fonte);
+      return `<tr><td>${esc(r.territorio)}</td><td class="tit"><b>${esc(r.titolo)}</b><div class="ente">${esc(r.programma||"")}${src?` · <a href="${esc(src)}" target="_blank" rel="noopener">calendario</a>`:""}</div></td><td>${esc(r.obiettivo||"")}</td><td>${esc(r.beneficiari||"")}</td><td class="dt">${eur(r.dotazione_eur)||esc(r.dotazione||"n.d.")}</td><td class="dt">${esc(r.apertura&&r.apertura!=="N.D."?r.apertura:it(r.apertura_iso))}</td><td>${pill}</td></tr>`}).join("")
+      :'<tr class="empty"><td colspan="7"><strong>Nessun risultato</strong>Nessun invito corrisponde ai filtri scelti.</td></tr>';
+  }
+  ["rq","r-tip","r-terr","r-os","r-st"].forEach(id=>$(id).addEventListener("input",renderRadar));
+  $("r-reset").addEventListener("click",()=>{["rq","r-tip","r-terr","r-os","r-st"].forEach(id=>$(id).value="");renderRadar();$("rq").focus()});
+
+  /* ---------- Navigazione ---------- */
+  /* Calendari regionali nascosti: la sezione resta nel codice ma non è raggiungibile */
+  $("view-calendari").hidden=true;$("view-registro").hidden=false;
+
+  /* ---------- Dati ---------- */
+  Promise.allSettled([getJSON("data/meta.json"),getJSON("data/opportunita.json"),Promise.resolve([]),getJSON("data/schede/index.json"),getJSON("data/schede/richieste.json")]).then(([m,o,i,s,rq])=>{
+    if(m.status==="fulfilled")meta=m.value||{};
+    if(rq.status==="fulfilled")inCoda=rq.value||{};
+    if(m.status==="fulfilled"&&m.value.aggiornato_il){const d=new Date(m.value.aggiornato_il);$("agg").textContent=isNaN(d)?m.value.aggiornato_il:d.toLocaleString("it-IT",{day:"2-digit",month:"long",year:"numeric",hour:"2-digit",minute:"2-digit"})}
+    if(s.status==="fulfilled")schedeIdx=s.value||{};
+    Object.keys(mie).forEach(k=>{const d=mie[k];if(schedeIdx[k]||(Date.now()-new Date(d))>3*864e5)delete mie[k]});salvaMie();
+    if(o.status==="fulfilled"){rows=Array.isArray(o.value)?o.value:[];render()}
+    else $("rows").innerHTML='<tr class="empty"><td colspan="6"><strong>Elenco non disponibile</strong>Non è stato possibile caricare le opportunità. Ricarica la pagina tra qualche minuto.</td></tr>',$("count").textContent="";
+    if(i.status==="fulfilled"){inviti=Array.isArray(i.value)?i.value:[]}
+    renderRadar();
+  });
+})();
+</script>
+</body>
+</html>
