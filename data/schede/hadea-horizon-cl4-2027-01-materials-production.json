@@ -1,0 +1,61 @@
+{
+ "n": 5,
+ "titolo": "Horizon Europe Cluster 4 – Leadership in materials and production (HORIZON-CL4-2027-01)",
+ "generata_il": "2026-11-04T14:55:00+01:00",
+ "voci": [
+  {
+   "valore": "Rafforzare la leadership europea nei materiali avanzati e nella manifattura: produzione avanzata, de- e re-manufacturing, materiali circolari, materie prime critiche e valorizzazione dei risultati della ricerca. Tre topic sono pensati per PMI e startup.",
+   "voce": "Finalità"
+  },
+  {
+   "valore": "Soggetti stabiliti in Stati UE o Paesi associati: grandi imprese, PMI e startup, università e organismi di ricerca, altri soggetti giuridici.",
+   "voce": "Beneficiari"
+  },
+  {
+   "valore": "- Per i progetti collaborativi (RIA e IA): consorzio di almeno 3 soggetti indipendenti di 3 Stati UE o associati\n- Per le azioni di coordinamento (CSA) le condizioni possono essere diverse: verificare il testo del topic\n- Alcuni topic sono legati ai partenariati europei Made in Europe, Innovative Advanced Materials e Textiles for the Future",
+   "voce": "Requisiti di ammissibilità"
+  },
+  {
+   "valore": "224 M€ per la call single stage, più 35 M€ per i due topic Fast Track (INDUSTRY-FTRI). Budget per topic:\nTopic | Tipo | Budget\nMAT-PROD-02 Manifattura avanzata per prodotti chiave | IA | 36 M€\nMAT-PROD-03 De- e re-manufacturing | RIA | 36 M€\nMAT-PROD-06 Materiali avanzati circolari | RIA | 36 M€\nMAT-PROD-08 Circolarità tessile | IA | 16 M€\nMAT-PROD-16 Lavorazione innovativa delle materie prime | IA | 49 M€\nMAT-PROD-17 Rete di esperti sulle materie prime critiche | CSA | 3 M€\nMAT-PROD-22 Materiali e processi che riducono la dipendenza da materie prime critiche | IA | 36 M€\nMAT-PROD-42 Proprietà intellettuale accademica per industria, PMI e startup | CSA | 2 M€\nMAT-PROD-47 Accesso alle infrastrutture tecnologiche per startup e PMI | CSA | 5 M€\nMAT-PROD-49 Proof of market dei risultati Horizon | IA | 5 M€",
+   "voce": "Dotazione finanziaria"
+  },
+  {
+   "valore": "- Progetti di ricerca e innovazione e di dimostrazione nei temi dei topic sopra elencati\n- Per le PMI i topic più accessibili sono MAT-PROD-42, MAT-PROD-47 e MAT-PROD-49\n- Topic Fast Track: MAT-PROD-61 (svolte nelle tecnologie industriali) e MAT-PROD-62 (Piano d'azione per l'industria chimica)",
+   "voce": "Progetti ammissibili"
+  },
+  {
+   "valore": "n.d. nella fonte consultata; di norma 36-48 mesi per RIA e IA. Verificare nel testo del topic.",
+   "voce": "Durata progetto"
+  },
+  {
+   "valore": "Regole standard Horizon Europe:\n- personale\n- subcontratti\n- viaggi, attrezzature (ammortamento), altri beni e servizi\n- costi indiretti forfettari pari al 25% dei costi diretti (esclusi i subcontratti)",
+   "voce": "Spese ammissibili"
+  },
+  {
+   "valore": "- Contributo indicativo per progetto: da 2 a 12,5 M€ secondo il topic (fonte secondaria)\n- 100% dei costi ammissibili per RIA e CSA\n- IA: 70% per i soggetti profit, 100% per i non profit",
+   "voce": "Intensità del contributo"
+  },
+  {
+   "valore": "Regole standard Horizon Europe: prefinanziamento alla firma del Grant Agreement, pagamenti intermedi per periodo di rendicontazione, saldo finale con restituzione della trattenuta del 5% per il Fondo di garanzia.",
+   "voce": "Erogazione delle agevolazioni"
+  },
+  {
+   "valore": "- Single stage per la call INDUSTRY 2027-01\n- Criteri Excellence, Impact, Quality and efficiency of the implementation, punteggio 0-5 ciascuno, soglia 3 per criterio e 10/15 complessiva\nN.B. Il topic HORIZON-CL4-2027-02-MAT-PROD-32 appartiene a un'altra call ed è a due fasi (2 febbraio e 2 settembre 2027).",
+   "voce": "Procedura di valutazione"
+  },
+  {
+   "valore": "- Apertura: autunno 2026 (alcuni topic risultano ancora \"forthcoming\" sul Portale)\n- Scadenza: 2 febbraio 2027, ore 17:00 (ora di Bruxelles)\n- Esito: di norma circa 5 mesi dopo la scadenza",
+   "voce": "Timing"
+  },
+  {
+   "valore": "https://hadea.ec.europa.eu/calls-proposals/horizon-europe-industry-leadership-materials-and-production-europe_en\nhttps://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/home",
+   "voce": "Link"
+  }
+ ],
+ "appendici": [],
+ "fonti": [
+  "https://hadea.ec.europa.eu/calls-proposals/horizon-europe-industry-leadership-materials-and-production-europe_en",
+  "https://www.welcomeurope.com/en/the-list-of-our-calls-projects/horizon-europe-industry-2027/",
+  "https://steinbeis-europa.de/de/foerderungen/destination-leadership-in-materials-and-production-for-europe"
+ ]
+}

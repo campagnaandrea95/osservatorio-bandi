@@ -1,0 +1,66 @@
+{
+ "n": 3,
+ "titolo": "Horizon Europe Cluster 5 – Energy call (HORIZON-CL5-2026-11)",
+ "generata_il": "2026-11-04T14:55:00+01:00",
+ "voci": [
+  {
+   "valore": "Finanziare progetti di ricerca e innovazione che rendano il sistema energetico europeo più sostenibile, sicuro e competitivo. La call riunisce cinque temi: bioenergia per la cogenerazione, geotermia profonda, fotovoltaico innovativo, combustibili rinnovabili e dati per l'intelligenza artificiale applicata all'energia.",
+   "voce": "Finalità"
+  },
+  {
+   "valore": "Qualsiasi soggetto giuridico stabilito in uno Stato membro UE o in un Paese associato a Horizon Europe:\n- imprese di ogni dimensione, comprese PMI e startup\n- università e organismi di ricerca\n- enti pubblici, associazioni, cluster",
+   "voce": "Beneficiari"
+  },
+  {
+   "valore": "- Regola generale Horizon per azioni collaborative: consorzio di almeno 3 soggetti indipendenti di 3 diversi Stati UE o associati, di cui almeno uno di uno Stato membro\n- Eventuali condizioni aggiuntive (es. partecipazione obbligatoria al partenariato EUPI-PV per il topic fotovoltaico, TRL minimo) sono fissate nel testo di ciascun topic sul Funding & Tenders Portal\nN.B. Il tipo di azione (RIA, IA, CSA, PCP) e le condizioni specifiche di ogni topic vanno verificati sul Portale prima di impostare la proposta.",
+   "voce": "Requisiti di ammissibilità"
+  },
+  {
+   "valore": "131,5 M€ complessivi, così ripartiti tra i topic (dati da fonte secondaria):\nTopic | Budget\nHORIZON-CL5-2026-11-D3-04 | 40 M€\nHORIZON-CL5-2026-11-D3-05 | 13,5 M€\nHORIZON-CL5-2026-11-D3-06 | 18 M€\nHORIZON-CL5-2026-11-D3-14 (partenariato EUPI-PV) | 30 M€\nHORIZON-CL5-2026-11-D3-23 | 30 M€",
+   "voce": "Dotazione finanziaria"
+  },
+  {
+   "valore": "- Bioenergia: dimostrazione di filiere regionali di biocombustibili solidi sostenibili con conversione in cogenerazione ad alta efficienza\n- Geotermia: valutazione del potenziale di serbatoi sedimentari profondi e di basamenti cristallini\n- Fotovoltaico: progettazione di sistemi per applicazioni fotovoltaiche innovative (partenariato EUPI-PV)\n- Combustibili rinnovabili: riduzione del rischio tecnologico tramite appalti pre-commerciali transnazionali\n- IA ed energia: condivisione di dati per addestrare modelli di base di intelligenza artificiale per il settore energetico",
+   "voce": "Progetti ammissibili"
+  },
+  {
+   "valore": "n.d. nella fonte consultata; per i progetti Horizon di questo tipo è di norma tra 36 e 48 mesi. Verificare nel testo del topic.",
+   "voce": "Durata progetto"
+  },
+  {
+   "valore": "Regole standard Horizon Europe:\n- personale\n- subcontratti\n- viaggi, attrezzature (ammortamento), altri beni e servizi\n- costi indiretti forfettari pari al 25% dei costi diretti (esclusi i subcontratti)",
+   "voce": "Spese ammissibili"
+  },
+  {
+   "valore": "- Contributo indicativo per progetto: tra 1 e 4 M€ (fonte secondaria)\n- Regole Horizon: 100% dei costi ammissibili per le azioni di ricerca e innovazione (RIA) e di coordinamento (CSA); 70% per le azioni di innovazione (IA) dei soggetti profit, 100% per i non profit",
+   "voce": "Intensità del contributo"
+  },
+  {
+   "valore": "Regole standard Horizon Europe:\n- prefinanziamento alla firma del Grant Agreement\n- pagamenti intermedi a ogni periodo di rendicontazione\n- saldo finale, al netto della trattenuta del 5% per il Fondo di garanzia dei partecipanti, che viene restituita a fine progetto",
+   "voce": "Erogazione delle agevolazioni"
+  },
+  {
+   "valore": "- Procedura in una sola fase (single stage)\n- Valutazione di esperti indipendenti su tre criteri: Excellence, Impact, Quality and efficiency of the implementation\n- Punteggio da 0 a 5 per criterio, soglia 3 per criterio e 10/15 complessiva (regola generale Horizon)",
+   "voce": "Procedura di valutazione"
+  },
+  {
+   "valore": "- Apertura: 4 agosto 2026\n- Scadenza: 1 dicembre 2026, ore 17:00 (ora di Bruxelles)\n- Esito: di norma circa 5 mesi dopo la scadenza; firma del Grant Agreement entro circa 8 mesi",
+   "voce": "Timing"
+  },
+  {
+   "valore": "https://cinea.ec.europa.eu/funding-opportunities/calls-proposals/eur-1315-million-available-horizon-europe-energy-call_en\nhttps://ec.europa.eu/info/funding-tenders/opportunities/portal/screen/home",
+   "voce": "Link"
+  }
+ ],
+ "appendici": [
+  {
+   "valore": "Scadenza tra meno di 4 settimane: è realistico solo entrare come partner in un consorzio già in formazione. Gli abbinamenti tra codice del topic e tema sopra riportati vengono da una fonte secondaria e vanno confermati sul Portale.",
+   "voce": "Note per la candidatura"
+  }
+ ],
+ "fonti": [
+  "https://cinea.ec.europa.eu/funding-opportunities/calls-proposals/eur-1315-million-available-horizon-europe-energy-call_en",
+  "https://www.hezelburcht.com/en/news/horizon-europe-cluster-5-call-open-e-131-5-million-available-for-energy-innovation/",
+  "https://www.welcomeurope.com/en/the-list-of-our-calls-projects/horizon-europe-energy-2026/"
+ ]
+}
