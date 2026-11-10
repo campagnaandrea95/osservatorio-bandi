@@ -3724,5 +3724,23 @@
   "agevolazione": "Fondo perduto 70% fino a 7.000 €",
   "link": "https://bandi.contributiregione.it/bando/bari-voucher-turismo-contributi-70-per-cento-fino-a-7000-euro",
   "da_verificare": true
+ },
+ {
+  "id": "sardegna-fondo-competitivita-imprese-2026",
+  "n": 209,
+  "titolo": "Fondo di Competitività delle imprese – Avviso 2026",
+  "ente": "Regione Sardegna (soggetto gestore SFIRS)",
+  "tipologia": "Investimenti produttivi",
+  "territorio": "Sardegna",
+  "stato": "Attivo",
+  "scadenza": "30/06/2027 ore 12 (a sportello, salvo chiusura anticipata)",
+  "scadenza_iso": "2027-06-30",
+  "pubblicato_il": "2026-09-03",
+  "segnalato_il": "2026-11-10",
+  "sintesi": "Finanziamenti per programmi di investimento in unità produttive in Sardegna, anche reindustrializzazione e riattivazione di siti dismessi; domande su SIPES dal 24/09/2026.",
+  "beneficiari": "Micro, piccole, medie e grandi imprese con unità produttive in Sardegna",
+  "agevolazione": "Finanziamenti a tasso di mercato da 100.000 € a 5 M€ (leasing immobiliare, lease-back, leasing d'azienda, mutuo); dotazione 42,5 M€ (FESR, JTF Sulcis, fondi regionali)",
+  "link": "https://www.unionesarda.it/economia/sardegna-bando-da-42-5-milioni-per-nuovi-investimenti-produttivi-umafz7vb",
+  "da_verificare": true
  }
 ]
