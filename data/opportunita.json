@@ -3850,5 +3850,41 @@
   "agevolazione": "Fondo perduto 50-70%; max 20.000 € (25.000 € per acquisti dedicati a persone con disabilità nella misura turismo in bici)",
   "link": "https://www.assolombarda.it/servizi/credito-finanza-e-incentivi/informazioni/filiera-turistica-sostenibile-e-accessibile-contributi-fino-a-25mila-euro",
   "da_verificare": true
+ },
+ {
+  "id": "trento-fare-impresa-desertificazione-commerciale-2026",
+  "n": 216,
+  "titolo": "Bando Fare impresa in aree a rischio desertificazione commerciale (L.p. 6/2023)",
+  "ente": "Provincia autonoma di Trento",
+  "tipologia": "Investimenti produttivi",
+  "territorio": "Provincia di Trento",
+  "stato": "Attivo",
+  "scadenza": "30/06/2027 ore 12:00 (domande dal 02/11/2026)",
+  "scadenza_iso": "2027-06-30",
+  "pubblicato_il": "2026-10-05",
+  "segnalato_il": "2026-11-13",
+  "sintesi": "Contributi a PMI del commercio e dei servizi che investono per aprire o sviluppare attività nei comuni trentini ad alto rischio di desertificazione commerciale. Dotazione indicata in 1 M€; domande sulla piattaforma Agorà di Trentino Sviluppo.",
+  "beneficiari": "PMI con ATECO ammessi del commercio/servizi, max 4 localizzazioni di dettaglio o ristorazione al 31/12/2025",
+  "agevolazione": "Contributo in conto capitale 50% (de minimis), +10% impresa femminile/giovanile, +10% con assunzione; spesa da 25.000 a 300.000 €",
+  "link": "https://www.provincia.tn.it/Servizi/Bando-Fare-impresa-in-aree-a-rischio-desertificazione-commerciale-L.p.-6-2023",
+  "da_verificare": false
+ },
+ {
+  "id": "mimit-mini-contratti-sviluppo-automotive-2026",
+  "n": 217,
+  "titolo": "Mini contratti di sviluppo – filiera automotive",
+  "ente": "Ministero delle Imprese e del Made in Italy",
+  "tipologia": "Investimenti produttivi",
+  "territorio": "Italia",
+  "stato": "Da attivare",
+  "scadenza": "data di apertura da comunicare",
+  "scadenza_iso": "",
+  "pubblicato_il": "2026-09-07",
+  "segnalato_il": "2026-11-13",
+  "sintesi": "Decreto MIMIT del 7/09/2026 che stanzia 300 M€ per programmi di investimento di minore dimensione della filiera automotive; soglie, gestore e data di apertura non ancora pubblicati.",
+  "beneficiari": "Imprese della filiera automotive (riserva 60% PMI, 40% Mezzogiorno)",
+  "agevolazione": "Fino al 75% delle spese tra fondo perduto e finanziamento agevolato; dotazione 300 M€",
+  "link": "https://www.mimit.gov.it/it/notizie-stampa/automotive-300-mln-per-la-filiera-con-mini-contratti-di-sviluppo",
+  "da_verificare": true
  }
 ]
