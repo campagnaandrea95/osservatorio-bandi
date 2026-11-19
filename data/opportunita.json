@@ -1788,8 +1788,8 @@
   "ente": "Regione Calabria (L.R. 32/2026, DGR 662/2026)",
   "tipologia": "Altro",
   "territorio": "Calabria",
-  "stato": "Da attivare",
-  "scadenza": "sportello dal 18/11/2026 fino a esaurimento risorse",
+  "stato": "Attivo",
+  "scadenza": "a sportello dal 18/11/2026 fino a esaurimento risorse",
   "scadenza_iso": "",
   "pubblicato_il": "2026-11-03",
   "segnalato_il": "2026-11-04",
@@ -3975,6 +3975,24 @@
   "beneficiari": "PMI con sede operativa nel Lazio",
   "agevolazione": "Fondo perduto de minimis 15.240 € per fiera (max 3); dotazione 15 M€ (PR FESR Lazio)",
   "link": "https://www.lazioinnova.it/bandi/voucher-internazionalizzazione-pmi-2027/",
+  "da_verificare": false
+ },
+ {
+  "id": "cciaa-riviere-liguria-creaimpresa-2026",
+  "n": 223,
+  "titolo": "Avviso CreaImpresa – edizione 2026",
+  "ente": "Camera di Commercio Riviere di Liguria (Imperia, La Spezia, Savona)",
+  "tipologia": "Avvio d'impresa e startup",
+  "territorio": "Liguria",
+  "stato": "Da attivare",
+  "scadenza": "15/02/2027 ore 12 (seconda finestra dal 15/01/2027; prima finestra chiusa il 15/11/2026)",
+  "scadenza_iso": "2027-02-15",
+  "pubblicato_il": "2026-10-01",
+  "segnalato_il": "2026-11-19",
+  "sintesi": "Contributo per l'avvio di nuove imprese nelle province di Imperia, La Spezia e Savona: copre costi di costituzione, servizi di accompagnamento e digitalizzazione. Domande via PEC in due finestre; richiesta la frequenza di almeno 4 moduli del corso camerale 'Fare impresa'.",
+  "beneficiari": "Aspiranti imprenditori e MPMI costituite dal 01/01/2026 con sede in provincia di IM, SP o SV",
+  "agevolazione": "Contributo da 2.000 a 5.000 € (5.250 € con rating di legalità), de minimis; dotazione 45.000 € (15.000 € per provincia)",
+  "link": "https://www.rivlig.camcom.gov.it/lavoro-giovani-occupazione/sni-sportello-nuove-imprese/contributi-la-creazione-di-impresa",
   "da_verificare": false
  }
 ]

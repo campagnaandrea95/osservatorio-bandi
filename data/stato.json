@@ -124,7 +124,7 @@
   "regione-calabria-accoglienza-turistica-qualita-linea-2": 1,
   "regione-calabria-attrazione-investimenti-grandi-imprese": 1,
   "regione-calabria-caro-carburante-agricoltura-2026": 1,
-  "regione-calabria-caro-carburante-autotrasporto-2026": 1,
+  "regione-calabria-caro-carburante-autotrasporto-2026": 2,
   "regione-calabria-certificazione-parita-genere": 1,
   "regione-calabria-dunamis-assunzioni": 1,
   "regione-calabria-emersione-ricettivita-seconde-case": 1,
@@ -221,7 +221,8 @@
   "puglia-pia-piccole-medie-imprese": 1,
   "puglia-minipia": 1,
   "cciaa-romagna-restanza-2026": 1,
-  "lazio-innova-voucher-internazionalizzazione-pmi-2027": 1
+  "lazio-innova-voucher-internazionalizzazione-pmi-2027": 1,
+  "cciaa-riviere-liguria-creaimpresa-2026": 1
  },
  "esiti": {},
  "schede": {
