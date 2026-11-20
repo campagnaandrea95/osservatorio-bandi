@@ -1663,15 +1663,15 @@
   "tipologia": "Investimenti produttivi",
   "territorio": "Veneto",
   "stato": "Attivo",
-  "scadenza": "n.d.",
-  "scadenza_iso": "",
-  "pubblicato_il": "",
+  "scadenza": "chiuso: domande dal 08/09/2026 al 29/09/2026 ore 12",
+  "scadenza_iso": "2026-09-29",
+  "pubblicato_il": "2026-07-28",
   "segnalato_il": "2026-11-04",
-  "sintesi": "Contributi per investimenti delle imprese artigiane venete.",
+  "sintesi": "Contributi per investimenti delle imprese artigiane venete (DGR 823/2026). Finestra chiusa il 29/09/2026.",
   "beneficiari": "Imprese artigiane venete",
-  "agevolazione": "Fondo perduto fino a 60.000 €",
-  "link": "https://www.reteagevolazioni.it/bando-il-veneto-artigiano-2026/",
-  "da_verificare": true
+  "agevolazione": "Fondo perduto 30% della spesa rendicontata; max 60.000 € (Linea Ordinaria) o 30.000 € (Linea Maestri Artigiani); dotazione 3 M€",
+  "link": "https://www.regione.veneto.it/article-detail?articleId=14404660",
+  "da_verificare": false
  },
  {
   "id": "cciaa-vicenza-bando-unico-2026",
@@ -1860,7 +1860,7 @@
   "ente": "ISMEA / MASAF",
   "tipologia": "Altro",
   "territorio": "Italia",
-  "stato": "Da attivare",
+  "stato": "Attivo",
   "scadenza": "20/11/2026 ore 12 (domande dal 05/11/2026 ore 12)",
   "scadenza_iso": "2026-11-20",
   "pubblicato_il": "2026-10-28",
@@ -3993,6 +3993,24 @@
   "beneficiari": "Aspiranti imprenditori e MPMI costituite dal 01/01/2026 con sede in provincia di IM, SP o SV",
   "agevolazione": "Contributo da 2.000 a 5.000 € (5.250 € con rating di legalità), de minimis; dotazione 45.000 € (15.000 € per provincia)",
   "link": "https://www.rivlig.camcom.gov.it/lavoro-giovani-occupazione/sni-sportello-nuove-imprese/contributi-la-creazione-di-impresa",
+  "da_verificare": false
+ },
+ {
+  "id": "trento-aiuti-ricerca-sviluppo-lp6-2023",
+  "n": 224,
+  "titolo": "Aiuti per progetti di ricerca e sviluppo (L.p. 6/2023)",
+  "ente": "Provincia autonoma di Trento – APIAE",
+  "tipologia": "R&D",
+  "territorio": "Provincia di Trento",
+  "stato": "Attivo",
+  "scadenza": "31/12/2026 (domande dal 1° gennaio al 31 dicembre di ogni anno)",
+  "scadenza_iso": "2026-12-31",
+  "pubblicato_il": "2023-11-21",
+  "segnalato_il": "2026-11-20",
+  "sintesi": "Contributi per progetti di ricerca industriale e sviluppo sperimentale delle imprese trentine e programmi dei centri di ricerca, a sportello con finestra annuale. La scheda risulta 'Attivo' ma segnala il servizio online momentaneamente non disponibile: verificare prima di presentare.",
+  "beneficiari": "Imprese di ogni dimensione e centri di ricerca con unità operativa in Trentino (progetti sotto 200.000 € vanno su Crescita Trentino)",
+  "agevolazione": "Contributo in esenzione (Reg. UE 651/2014): A1 imprese con intensità per tipologia di attività e maggiorazioni PMI, spesa > 200.000 €; A2 centri di ricerca 25%, spesa > 1 M€; spesa max 10 M€",
+  "link": "https://www.provincia.tn.it/Servizi/Aiuti-per-progetti-di-ricerca-e-sviluppo-L.p.-6-2023",
   "da_verificare": false
  }
 ]
