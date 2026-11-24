@@ -655,15 +655,15 @@
   "tipologia": "Innovazione",
   "territorio": "Sardegna",
   "stato": "Attivo",
-  "scadenza": "30/11/2026 (dato da aggregatore)",
-  "scadenza_iso": "2026-11-30",
+  "scadenza": "31/03/2027 (prorogata)",
+  "scadenza_iso": "2027-03-31",
   "pubblicato_il": "",
   "segnalato_il": "2026-10-30",
-  "sintesi": "Progetti di innovazione collaborativa negli ambiti della strategia S3 regionale; bando rettificato a settembre 2026, scadenza da verificare.",
+  "sintesi": "Progetti di innovazione collaborativa negli ambiti della strategia S3 regionale; termine per le domande prorogato al 31/03/2027 (notizia Sardegna Ricerche del 20/11/2026).",
   "beneficiari": "Aggregazioni di MPMI in rete e singole MPMI partecipanti a un PIC ammesso",
   "agevolazione": "Fondo perduto 100% per le aggregazioni, 80% per le singole (dato da aggregatore); progetti da 25.000 a 100.000 € (singole) o 150.000-300.000 € (aggregazioni); dotazione 7 M€",
-  "link": "https://www.sardegnaricerche.it/index.php?xsl=370&s=472816&v=2&c=96134&nc=1&sc=&qr=1&qp=2&vd=2&t=3&sb=1",
-  "da_verificare": true
+  "link": "https://www.sardegnaricerche.it/index.php?xsl=370&s=473730&v=2&c=3169&nc=1&sc=&qr=1&qp=2&vd=2&t=3&sb=1",
+  "da_verificare": false
  },
  {
   "id": "regione-sicilia-fiere-internazionali-2027",
@@ -4101,6 +4101,42 @@
   "beneficiari": "Imprese con sede nelle Marche",
   "agevolazione": "Fondo perduto fino al 30% + finanziamento agevolato fino al 70%",
   "link": "https://bandi.contributiregione.it/bando/bando-energia-e-fotovoltaico-regione-marche-contributi-fondo-perduto-fino-al-30-per-cento-e-finanziamenti-agevolati-fino-al-70-per-cento",
+  "da_verificare": true
+ },
+ {
+  "id": "die-bonus-edicole-2026",
+  "n": 230,
+  "titolo": "Bonus edicole 2026",
+  "ente": "Presidenza del Consiglio – Dipartimento per l'informazione e l'editoria",
+  "tipologia": "Altro",
+  "territorio": "Italia",
+  "stato": "Attivo",
+  "scadenza": "domande dal 24/11/2026, termine n.d.",
+  "scadenza_iso": "",
+  "pubblicato_il": "2026-10-13",
+  "segnalato_il": "2026-11-24",
+  "sintesi": "Contributo alle edicole per le spese sostenute nel 2025 (tributi locali, affitti, energia, telefonia e internet, registratori telematici e POS, altre spese di digitalizzazione e ammodernamento).",
+  "beneficiari": "Imprese titolari di punti vendita esclusivi di giornali e riviste",
+  "agevolazione": "Contributo pari all'80% delle spese 2025, fino a 4.500 € (alcune fonti indicano 5.000 €)",
+  "link": "https://www.pmi.it/economia/finanziamenti/478166/bonus-edicole.html",
+  "da_verificare": true
+ },
+ {
+  "id": "abruzzo-micro-prestiti-avviso-unico-2026",
+  "n": 231,
+  "titolo": "Abruzzo Micro Prestiti – Avviso unico",
+  "ente": "Regione Abruzzo / FiRA (PR FSE+ 2021-2027)",
+  "tipologia": "Avvio d'impresa e startup",
+  "territorio": "Abruzzo",
+  "stato": "Attivo",
+  "scadenza": "n.d. (elenchi istruttori Linea B Donne pubblicati il 26/10/2026)",
+  "scadenza_iso": "",
+  "pubblicato_il": "2026-03-17",
+  "segnalato_il": "2026-11-24",
+  "sintesi": "Microprestiti per avviare o consolidare piccole attività in Abruzzo, con linee dedicate (tra cui una per le donne); stato dello sportello e scadenza da confermare.",
+  "beneficiari": "Aspiranti imprenditori, microimprese e lavoratori autonomi abruzzesi (n.d. in dettaglio)",
+  "agevolazione": "Microprestito agevolato (importi n.d.)",
+  "link": "https://coesione.regione.abruzzo.it/sites/coesione.regione.abruzzo.it/files/allegati/1137/2026-03-17/avviso-unico-abruzzo-micro-prestiti.pdf",
   "da_verificare": true
  }
 ]
